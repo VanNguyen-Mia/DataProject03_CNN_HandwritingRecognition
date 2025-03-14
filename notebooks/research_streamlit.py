@@ -85,20 +85,10 @@ elif input_type == "Draw your digit!":
         
     if submitted_input:
         user_img = Image.fromarray(canvas_result.image_data.astype(np.uint8))
-
-        # Convert to grayscale (L mode) and resize
         user_img_resized = user_img.resize((28, 28)).convert('L')
-
-        # Convert to NumPy array
         user_img_array = np.array(user_img_resized)
-
-        # Center the image (if drawn digits are off-center)
         centered_image = center_image(user_img_array)
-
-        # Convert the centered image to a tensor (for model input)
         convert_user_input_to_tensor = tf.keras.preprocessing.image.img_to_array(centered_image) / 255.0
-
-        # Add batch dimension for model input
         input_tensor = np.expand_dims(convert_user_input_to_tensor, axis=0)
 
         st.image(user_img_resized)
