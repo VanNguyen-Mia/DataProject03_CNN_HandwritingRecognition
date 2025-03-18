@@ -20,7 +20,7 @@ def center_image(image_array):
     # Crop the image to the bounding box of the drawn object
     cropped = image_array[min_y:max_y+1, min_x:max_x+1]
 
-    # Create a new image (28x28) and paste the cropped image in the center
+    # Create a new image (28x28) and paste the cropped image ibn the center
     centered_image = np.zeros((28, 28))
     y_offset = (28 - cropped.shape[0]) // 2
     x_offset = (28 - cropped.shape[1]) // 2
@@ -73,7 +73,8 @@ elif input_type == "Draw your digit!":
     st.subheader('Tip!')
     st.write('Change the stroke width and see if this changes the model\'s prediction.')
     stroke_width = st.slider("Stroke width: ", 1, 100, 30)
-    canvas_result = st_canvas(background_color = "#ffffff", 
+    canvas_result = st_canvas(background_color = "#000000", 
+                              stroke_color= "#ffffff",
                               stroke_width = stroke_width, 
                               update_streamlit = True, 
                               height = 400, 
@@ -92,6 +93,7 @@ elif input_type == "Draw your digit!":
         input_tensor = np.expand_dims(convert_user_input_to_tensor, axis=0)
 
         st.image(user_img_resized)
+
     else:
         st.warning("No sample has been found!")
         st.stop()
